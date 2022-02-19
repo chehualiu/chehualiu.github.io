@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Blockly for the Web Codelab</title>
+  <title>音乐盒 - 可视化编程体验</title>
 
   <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
   <link rel="stylesheet" href="styles/index.css">
@@ -13,15 +13,15 @@
 
 <body mode="maker">
   <header class="mdl-color--cyan-500">
-    <h1 class="mode-maker">Music Maker</h1>
-    <h1 class="mode-edit mode-blockly">Music Maker Configuration</h1>
+    <h1 class="mode-maker">音乐盒 - 可视化编程体验</h1>
+    <h1 class="mode-edit mode-blockly">音乐编程配置</h1>
   </header>
 
   <main>
-    <button class="mode-maker mdl-button" id="edit">Edit</button>
-    <button class="mode-edit mdl-button mdl-js-button" id="done">Done</button>
-    <button class="mode-blockly mdl-button mdl-js-button" id="save">Save</button>
-    <p class="hint mode-edit">Tap any button to edit its code. <br/>When complete, press Done.</p>
+    <button class="mode-maker mdl-button" id="edit">点此处开始编辑</button>
+    <button class="mode-edit mdl-button mdl-js-button" id="done">完成</button>
+    <button class="mode-blockly mdl-button mdl-js-button" id="save">保存</button>
+    <p class="hint mode-edit">点击方块进行编码. <br/>结束后点完成按钮.</p>
 
     <div class="maker">
       <div>
@@ -43,21 +43,21 @@
 
     <div class="blockly-editor">
       <div id="blocklyDiv" style="height: 480px; width: 400px;"></div>
-      <xml id="toolbox" style="display: none">
-        <block type="controls_repeat_ext">
-          <value name="TIMES">
-            <shadow type="math_number">
-              <field name="NUM">5</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="play_sound"></block>
-      </xml>
+	  <xml id="toolbox" style="display: none">
+		  <block type="controls_repeat_ext">
+			<value name="TIMES">
+			  <shadow type="math_number">
+				<field name="NUM">2</field>
+			  </shadow>
+			</value>
+		  </block>
+		  <block type="play_sound"></block>
+	  </xml>
     </div>
-  </main>
-
+	
   <script src="https://unpkg.com/blockly"></script>
   <script src="scripts/music_maker.js"></script>
+  <script src="scripts/zh-hans.js"></script>
   <script src="scripts/sound_blocks.js"></script>
   <script src="scripts/main.js"></script>
 
