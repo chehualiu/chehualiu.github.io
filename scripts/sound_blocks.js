@@ -1,7 +1,7 @@
 Blockly.defineBlocksWithJsonArray([
   {
     "type": "play_sound",
-    "message0": "Play %1",
+    "message0": "弹 %1",
     "args0": [
       {
         "type": "field_dropdown",
