@@ -8,34 +8,35 @@
   let currentButton;
 
   function handlePlay(event) {
-    loadWorkspace(event.target);
-    let code = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
+    // Add code for playing sound.
+	loadWorkspace(event.target);
+	let code = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
     code += 'MusicMaker.play();';
-    // Eval can be dangerous. For more controlled execution, check
-    // https://github.com/NeilFraser/JS-Interpreter.
-    try {
-      eval(code);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  function loadWorkspace(button) {
-    const workspace = Blockly.getMainWorkspace();
-    if (button.blocklySave) {
-      Blockly.serialization.workspaces.load(button.blocklySave, workspace);
-    }
+	
+	try {
+		  eval(code);
+		} catch (error) {
+		  console.log(error);
+		}
   }
 
   function save(button) {
-    button.blocklySave = Blockly.serialization.workspaces.save(
-        Blockly.getMainWorkspace());
+    // Add code for saving the behavior of a button.
+	button.blocklyXml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
   }
 
   function handleSave() {
     document.body.setAttribute('mode', 'edit');
     save(currentButton);
   }
+
+	function loadWorkspace(button) {
+	  let workspace = Blockly.getMainWorkspace();
+	  workspace.clear();
+	  if (button.blocklyXml) {
+		Blockly.Xml.domToWorkspace(button.blocklyXml, workspace);
+	  }
+	}
 
   function enableEditMode() {
     document.body.setAttribute('mode', 'edit');
@@ -56,7 +57,7 @@
   function enableBlocklyMode(e) {
     document.body.setAttribute('mode', 'blockly');
     currentButton = e.target;
-    loadWorkspace(currentButton);
+	loadWorkspace(currentButton);
   }
 
   document.querySelector('#edit').addEventListener('click', enableEditMode);
@@ -64,33 +65,11 @@
   document.querySelector('#save').addEventListener('click', handleSave);
 
   enableMakerMode();
-
-  const toolbox = {
-    'kind': 'flyoutToolbox',
-    'contents': [
-      {
-        'kind': 'block',
-        'type': 'controls_repeat_ext',
-        'inputs': {
-          'TIMES': {
-            'shadow': {
-              'type': 'math_number',
-              'fields': {
-                'NUM': 5,
-              },
-            },
-          },
-        },
-      },
-      {
-        'kind': 'block',
-        'type': 'play_sound',
-      },
-    ],
-  };
-
+  
   Blockly.inject('blocklyDiv', {
-    toolbox: toolbox,
-    scrollbars: false,
-  });
+  toolbox: document.getElementById('toolbox'),
+  scrollbars: false
+});
+
+
 })();
